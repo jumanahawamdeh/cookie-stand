@@ -1,33 +1,38 @@
-body {
-  width: 950px;
-  justify-content: center;
-  margin: auto;
-  background-color: lightgrey;
-}
 
+head{
+  border-style: ridge;
+  background-position: center;
+  text-align: center;
+}
 h1 {
-  font-family: 'Anonymous Pro';
-  justify-content: center;
-  margin: auto;
+  background-color: bisque;
+  font-size: 50px;
+  text-align: center;
+  color: red;
+
+  font-family: "Times New Roman", Times, serif;
+  font-size: 60px;
+}
+body{
+  border-style: dotted;
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcT3wugvpr0pwYE4u5Srsk-WKHD0TLBXoyn74ELuzKNlQGC9GIFm");
+}
+p {
+  font-family: "Times New Roman", Times, serif;
+}
+
+table, th, td {
+  background-color: #cccccc;
+  border: 1px solid red;
+  background-position: center;
+  text-align: center;
+  font-size: 30px;
+}
+img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   width: 50%;
-  font-weight: bold;
-  color: salmon;
-  font-size: 32px;
 }
-
-#salmonTable{
-  border: salmon 15px ridge;
-
-}
-fieldset {
-  border: salmon 15px ridge;
-  width: 60%;
-  justify-content: center;
-  margin: auto;
-}
-
-table, tr, th, td {
-   border: 1px salmon solid;
-   border-radius: 5%;
-}
-

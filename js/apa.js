@@ -1,11 +1,11 @@
 "use strict"
 var hour = ["6am ", '7am ', '8am', '9am', '10am', '11am', '12pm ', '1pm ', '2pm ', '3pm ', '4pm ', '5pm ', '6pm ', '7pm '];
 var footerRow;
-function SweetShop(location, min, max, Avg) {
+function SweetShop(location, mincustomers, maxcustomers, theAverag) {
     this.location = location;
-    this.min = min;
-    this.max = max;
-    this.Avg = Avg;
+    this.mincustomers = mincustomers;
+    this.maxcustomers = maxcustomers;
+    this.theAverage = theAverag;
     this.dailySales = 0;
     this.hourlySales = [];
     this.random();
@@ -14,13 +14,13 @@ function SweetShop(location, min, max, Avg) {
 }
 
 SweetShop.prototype.random = function () {
-    var range = this.max - this.min;
-    var rand = Math.random() * range + this.min;
+    var range = this.maxcustomers - this.mincustomers;
+    var rand = Math.random() * range + this.mincustomers;
     return Math.ceil(rand);
 }
 SweetShop.prototype.hourlyDailySales = function () {
-    for (var jumana= 0; jumana < hour.length; jumana++) {
-        var numOfCookies = Math.ceil(this.random() * this.Avg);
+    for (var i = 0; i < hour.length; i++) {
+        var numOfCookies = Math.ceil(this.random() * this.theAverage);
         this.hourlySales.push(numOfCookies);
         this.dailySales += numOfCookies;
     }
@@ -32,6 +32,8 @@ shopList.push(new SweetShop('Tokyo', 3, 24, 1.2));
 shopList.push(new SweetShop('Dubai', 11, 38, 3.7));
 shopList.push(new SweetShop('Paris', 20, 38, 2.3));
 shopList.push(new SweetShop('Lima', 2, 16, 4.6));
+
+
 
 var container = document.getElementById('shops-for-cookies');
 var table1 = document.createElement('table');
@@ -59,18 +61,19 @@ function headerRow() {
 
 
 function cellDataInformation() {
-    for (var jumana = 0; jumana < shopList.length; jumana++) {
-        var currentShop = shopList[jumana];
+    for (var i = 0; i < shopList.length; i++) {
+        var currentShop = shopList[i];
         var shoprow = document.createElement('tr');
         table1.appendChild(shoprow);
         var shopTd = document.createElement('td');
         shoprow.appendChild(shopTd);
         shopTd.textContent = currentShop.location;
-        for (var j = 0; j < hour.length; j++) {
+     
+        for (var mai = 0; mai < hour.length; mai++) {
             var cellInput = document.createElement('td');
             shoprow.appendChild(cellInput);
-            cellInput.textContent = currentShop.hourlySales[j];
-            //dataIn.textContent = 'hi'
+            cellInput.textContent = currentShop.hourlySales[mai];
+
         }
         console.log(cellInput);
         shopTd = document.createElement('td');
@@ -78,7 +81,10 @@ function cellDataInformation() {
 
         shopTd.textContent = currentShop.dailySales;
     }
+    
+
 }
+
 function footerData() {
     var footerRowTr = document.createElement('tr');
     footerRow= footerRowTr ;
@@ -119,6 +125,13 @@ headerRow(table1);
 cellDataInformation(table1);
 footerData(table1);
 
+
+
+
+
+
+
+
 function renderRaw() {
     var tr = document.createElement('tr');
     table1.appendChild(tr);
@@ -127,32 +140,38 @@ function renderRaw() {
     var thecurrent =shopList[shopList.length-1];
     console.log(thecurrent);
     td.textContent = thecurrent.location;
-    
+
     for (var cellIndex = 0; cellIndex < hour.length; cellIndex++) {
         var info = document.createElement('td');
         tr.appendChild(info);
         info.textContent = thecurrent.hourlySales[cellIndex];
     }
+
      var td = document.createElement('td');
       tr.appendChild(td);
       td.textContent = thecurrent.dailySales;
   }
 
 
+
 function submitresult(event) {
     event.preventDefault();
-    var location = event.target.location.value;
-    var min = parseInt(event.target.min.value);
-    var max = parseInt(event.target.max.value);
-    var Avg= parseFloat(event.target.Avg.value);
+    var locationName = event.target.location.value;
+    var mincustomers = parseInt(event.target.mincustomers.value);
+    var maxcustomers = parseInt(event.target.maxcustomers.value);
+    var theAverag = parseFloat(event.target.theAverag.value);
 
-    var newShop = new SweetShop(location, min, max, Avg);
+    var newShop = new SweetShop(locationName, mincustomers, maxcustomers, theAverag);
     shopList.push(newShop);
     console.log(newShop);
     table1.removeChild(footerRow);
     
     renderRaw();
-    footerData();    
+    footerData();
+
+   
+    
 }
 var form = document.getElementById('addShopForm');
 form.addEventListener('submit', submitresult);
+
